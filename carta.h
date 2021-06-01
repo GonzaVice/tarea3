@@ -9,6 +9,7 @@ class Carta
     public:
         Carta() {};
         Carta(char, char);
+        int mostrar_info();
 };
 
 #endif
