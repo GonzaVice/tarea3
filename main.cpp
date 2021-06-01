@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+//#include <list>
+#include <algorithm>
 
 #include "jugador.h"
 #include "juego.h"
@@ -13,6 +15,14 @@ vector<Carta> deck_setup()
 {
     vector<Carta> baraja = vector<Carta>();
 
+/*
+    list<int> pos = list<int>();
+
+    for(int i = 0; i < 52; i++)
+    {
+        pos.push_back(i);
+    }
+*/
     for(int i = 0; i < 13; i++)
     {
         for(int j = 0; j < 4; j++)
@@ -23,6 +33,8 @@ vector<Carta> deck_setup()
             else baraja.push_back(Carta(i+1, 'T'));
         }
     }
+
+    random_shuffle(baraja.begin(), baraja.end());
     return baraja;
 }
 
@@ -35,7 +47,6 @@ int main()
     //player1.mostrar_info();
 
     vector<Carta> baraja = deck_setup();
-
 
     for(int i = 0; i < 52; i++)
     {
