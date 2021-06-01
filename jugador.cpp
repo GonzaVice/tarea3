@@ -1,10 +1,14 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include "jugador.h"
+#include <carta.h>
 
-Jugador::Jugador(std::string name, int money)
+Jugador::Jugador(std::string name, int money, std::vector<Carta> cards)
 {
 	nombre = name;
 	dinero = money;
+    mazo = cards;
 }
 
 int Jugador::mostrar_info()

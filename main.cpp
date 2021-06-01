@@ -15,14 +15,6 @@ vector<Carta> deck_setup()
 {
     vector<Carta> baraja = vector<Carta>();
 
-/*
-    list<int> pos = list<int>();
-
-    for(int i = 0; i < 52; i++)
-    {
-        pos.push_back(i);
-    }
-*/
     for(int i = 0; i < 13; i++)
     {
         for(int j = 0; j < 4; j++)
@@ -43,8 +35,10 @@ int main()
     Juego game = Juego("interfaz.txt");
     //game.interfaz();
 
-    Jugador player1 = Jugador("Clark", 1000);
-    //player1.mostrar_info();
+    vector<Carta> mazo = vector<Carta>();
+    vector<Jugador> players = vector<Jugador>();
+    players.push_back(Jugador("Clark", 1000, mazo));
+    players[0].mostrar_info();
 
     vector<Carta> baraja = deck_setup();
 
