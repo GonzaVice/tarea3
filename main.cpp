@@ -13,7 +13,6 @@ int main()
     Juego game = Juego("interfaz.txt");
     game.interfaz();
 
-    //Comentario
     Carta card1 = Carta('K', "Corazón");
     Carta card2 = Carta('T', "Diamante");
     Carta card3 = Carta('9', "Pica");
