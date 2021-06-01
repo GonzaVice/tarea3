@@ -6,11 +6,11 @@
 class Carta
 {
     private:
-        char tipo;
+        int tipo;
         std::string baraja;
     public:
         Carta() {};
-        Carta(char, std::string);
+        Carta(int, char);
         int mostrar_info();
 };
 

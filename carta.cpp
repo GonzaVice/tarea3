@@ -4,10 +4,14 @@
 
 using namespace std;
 
-Carta::Carta(char type, string deck)
+Carta::Carta(int type, char deck)
 {
     tipo = type;
     baraja = deck;
+    // C: Corazón
+    // P: Pica
+    // D: Diamante
+    // T: Trébol
 }
 
 int Carta::mostrar_info()
