@@ -13,10 +13,10 @@ int main()
     Juego game = Juego("interfaz.txt");
     game.interfaz();
 
-    Carta card1 = Carta('K', '♥');
-    Carta card2 = Carta('T', '♦');
-    Carta card3 = Carta('9', '♠');
-    Carta card4 = Carta('6', '♣');
+    Carta card1 = Carta('K', "Corazón");
+    Carta card2 = Carta('T', "Diamante");
+    Carta card3 = Carta('9', "Pica");
+    Carta card4 = Carta('6', "Trébol");
 
     card1.mostrar_info();
     card2.mostrar_info();
