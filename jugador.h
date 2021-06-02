@@ -7,11 +7,13 @@
 
 class Jugador
 {
-    private:
+    public:
+        //Atributos
         std::string nombre;
         int dinero;
         std::vector<Carta> mazo;
-    public:
+        
+        //Métodos
         Jugador() {};
         Jugador(std::string, int, std::vector<Carta>);
         int mostrar_info();

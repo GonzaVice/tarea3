@@ -5,10 +5,12 @@
 
 class Carta
 {
-    private:
+    public:
+        //Atributos
         int numero;
         char tipo;
-    public:
+        
+        //Métodos
         Carta() {};
         Carta(int, char);
         int mostrar_info();

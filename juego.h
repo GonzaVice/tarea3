@@ -8,17 +8,25 @@
 
 class Juego
 {
-    private:
+    public:
+        //Atributos
         std::string archivo;
         std::string guardado;
         std::vector<Jugador> jugadores;
         Jugador distruibidor;
         std::vector<Carta> baraja;
 
-    public:
+        //Métodos
         Juego() {};
         Juego(std::string, std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
         int interfaz();
+        int mostrar_jugadores();
+
+        //Opción 1:
+        int crear_jugador();
+
+        //Opción 2:
+        int eliminar_jugador();
 };
 
 #endif

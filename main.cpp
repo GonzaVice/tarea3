@@ -11,38 +11,7 @@
 
 using namespace std;
 
-int crear_jugador()
-{
-    string name;
-    cout << "Escribe su nombre: ";
-    cin >> name;
-    return 0;
-}
-
-int choose()
-{
-    int choosed;
-    cout << "Selecciona acción (1 a 4)\n";
-    cout << "  1) Crear jugador nuevo\n";
-    cout << "  2) Eliminar jugador\n";
-    cout << "  3) Iniciar mesa\n";
-    cout << "  4) Salir del Juego\n";
-
-    cin >> choosed;
-    while(choosed < 1 || choosed > 4)
-    {
-        cout << "\nEscoge bien tu opción\n";
-        cin >> choosed;
-    }
-
-    if(choosed == 1)
-    {
-        crear_jugador();
-    }
-
-    return choosed;
-}
-
+//Crea y revuelve las cartas
 vector<Carta> deck_setup()
 {
     vector<Carta> baraja = vector<Carta>();
@@ -62,27 +31,68 @@ vector<Carta> deck_setup()
     return baraja;
 }
 
+//Elección
+int choose(Juego game)
+{
+    int choosed = 0;
+
+    while(choosed != 4)
+    {
+        cout << "Selecciona acción (1 a 4)\n";
+        cout << "  1) Crear jugador nuevo\n";
+        cout << "  2) Eliminar jugador\n";
+        cout << "  3) Iniciar mesa\n";
+        cout << "  4) Salir del Juego\n";
+
+        cin >> choosed;
+        while(choosed < 1 || choosed > 4)
+        {
+            cout << "\nEscoge bien tu opción\n";
+            cin >> choosed;
+        }
+
+        if(choosed == 1)
+        {
+            game.crear_jugador();
+        }
+        else if(choosed == 2)
+        {
+            game.eliminar_jugador();
+        }
+    }
+
+    cout << "La cantidad de jugadores son: ";
+    cout << game.jugadores.size() << endl;
+
+    game.mostrar_jugadores();
+
+    return choosed;
+}
+
 int main()
 {
-    vector<Carta> mazo = vector<Carta>();
+    //Atributo jugadores
     vector<Jugador> players = vector<Jugador>();
-    players.push_back(Jugador("Clark", 1000, mazo));
-    //players[0].mostrar_info();
 
+    //Atributo distribuidor
     vector<Carta> mazo_dealer = vector<Carta>();
-    Jugador dealer = Jugador("CPU", 1000, mazo_dealer);
+    Jugador dealer = Jugador("CPU", 0, mazo_dealer);
 
+    //Atributo baraja
     vector<Carta> baraja = deck_setup();
 
+    /*
     for(int i = 0; i < 52; i++)
     {
         baraja[i].mostrar_info();
     }
+    */
 
-    Juego game = Juego("interfaz.txt", "save.txt", players, dealer, mazo);
-    //game.interfaz();
+    //Creación clase juego
+    Juego game = Juego("interfaz.txt", "save.txt", players, dealer, baraja);
 
-    int eleccion = choose();
+    //Comienza elección
+    int eleccion = choose(game);
 
     return 0;
 }
