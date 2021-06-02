@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "jugador.h"
-#include <carta.h>
+#include "carta.h"
 
 Jugador::Jugador(std::string name, int money, std::vector<Carta> cards)
 {

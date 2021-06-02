@@ -32,13 +32,13 @@ vector<Carta> deck_setup()
 
 int main()
 {
-    Juego game = Juego("interfaz.txt");
-    //game.interfaz();
-
     vector<Carta> mazo = vector<Carta>();
     vector<Jugador> players = vector<Jugador>();
     players.push_back(Jugador("Clark", 1000, mazo));
-    players[0].mostrar_info();
+    //players[0].mostrar_info();
+
+    vector<Carta> mazo_dealer = vector<Carta>();
+    Jugador dealer = Jugador("CPU", 1000, mazo_dealer);
 
     vector<Carta> baraja = deck_setup();
 
@@ -46,6 +46,10 @@ int main()
     {
         baraja[i].mostrar_info();
     }
+
+    Juego game = Juego("interfaz.txt", players, dealer, mazo);
+    //game.interfaz();
+
 
     return 0;
 }
