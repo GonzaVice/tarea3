@@ -6,9 +6,10 @@
 #include "carta.h"
 #include "jugador.h"
 
-Juego::Juego(std::string archive, std::vector<Jugador> players, Jugador dealer, std::vector<Carta> deck)
+Juego::Juego(std::string archive, std::string save, std::vector<Jugador> players, Jugador dealer, std::vector<Carta> deck)
 {
     archivo = archive;
+    guardado = save;
     jugadores = players;
     distruibidor = dealer;
     baraja = deck;

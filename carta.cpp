@@ -4,10 +4,10 @@
 
 using namespace std;
 
-Carta::Carta(int type, char deck)
+Carta::Carta(int number, char type)
 {
+    numero = number;
     tipo = type;
-    baraja = deck;
     // C: Corazón
     // P: Pica
     // D: Diamante
@@ -16,7 +16,7 @@ Carta::Carta(int type, char deck)
 
 int Carta::mostrar_info()
 {
-    cout << "Carta es Tipo " << tipo;
-    cout << " y su baraja es " << baraja << endl;
+    cout << "Carta es número " << numero;
+    cout << " y es tipo " << tipo << endl;
     return 0;
 }

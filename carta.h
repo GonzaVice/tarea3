@@ -6,8 +6,8 @@
 class Carta
 {
     private:
-        int tipo;
-        std::string baraja;
+        int numero;
+        char tipo;
     public:
         Carta() {};
         Carta(int, char);

@@ -10,13 +10,14 @@ class Juego
 {
     private:
         std::string archivo;
+        std::string guardado;
         std::vector<Jugador> jugadores;
         Jugador distruibidor;
         std::vector<Carta> baraja;
 
     public:
         Juego() {};
-        Juego(std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
+        Juego(std::string, std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
         int interfaz();
 };
 

@@ -11,6 +11,38 @@
 
 using namespace std;
 
+int crear_jugador()
+{
+    string name;
+    cout << "Escribe su nombre: ";
+    cin >> name;
+    return 0;
+}
+
+int choose()
+{
+    int choosed;
+    cout << "Selecciona acción (1 a 4)\n";
+    cout << "  1) Crear jugador nuevo\n";
+    cout << "  2) Eliminar jugador\n";
+    cout << "  3) Iniciar mesa\n";
+    cout << "  4) Salir del Juego\n";
+
+    cin >> choosed;
+    while(choosed < 1 || choosed > 4)
+    {
+        cout << "\nEscoge bien tu opción\n";
+        cin >> choosed;
+    }
+
+    if(choosed == 1)
+    {
+        crear_jugador();
+    }
+
+    return choosed;
+}
+
 vector<Carta> deck_setup()
 {
     vector<Carta> baraja = vector<Carta>();
@@ -47,9 +79,10 @@ int main()
         baraja[i].mostrar_info();
     }
 
-    Juego game = Juego("interfaz.txt", players, dealer, mazo);
+    Juego game = Juego("interfaz.txt", "save.txt", players, dealer, mazo);
     //game.interfaz();
 
+    int eleccion = choose();
 
     return 0;
 }
