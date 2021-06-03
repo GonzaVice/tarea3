@@ -26,7 +26,7 @@ Juego::Juego(string archive, string save, vector<Jugador> players, Jugador deale
     baraja = deck;
 }
 
-int Juego::interfaz()
+void Juego::interfaz()
 {
     string printer;
     ifstream inter;
@@ -41,19 +41,19 @@ int Juego::interfaz()
 	}
 	inter.close();
 
-    return 0;
+    return;
 }
 
-int Juego::mostrar_jugadores()
+void Juego::mostrar_jugadores()
 {
     for(int i = 0; i < jugadores.size(); i++)
     {
         cout << i+1 << ") " << jugadores[i].nombre << " y $" << jugadores[i].dinero << endl;
     }
-    return 0;
+    return;
 }
 
-int Juego::crear_jugador()
+void Juego::crear_jugador()
 {
     //Definición
     string name;
@@ -73,10 +73,10 @@ int Juego::crear_jugador()
     jugadores.push_back(player);
 
     //Retornar
-    return 0;
+    return;
 }
 
-int Juego::eliminar_jugador()
+void Juego::eliminar_jugador()
 {
     if(jugadores.size() <= 0)
     {
@@ -101,20 +101,38 @@ int Juego::eliminar_jugador()
         }
         jugadores.erase(jugadores.begin()+(eleccion-1));
     }
-    return 0;
+    return;
 }
 
-int Juego::table_init()
+void Juego::repartir_cartas()
+{
+    for(int i = 0; i < jugadores.size(); i++)
+    {
+        Carta first_card = baraja.back();
+        baraja.pop_back();
+        jugadores[i].mazo.push_back(first_card);
+
+        Carta second_card = baraja.back();
+        baraja.pop_back();
+        jugadores[i].mazo.push_back(second_card);
+
+        cout << " Jugador " << jugadores[i].nombre << endl;
+        cout << jugadores[i].mazo[0].mostrar_info();
+        cout << jugadores[i].mazo[1].mostrar_info() << endl;
+    }
+    return;
+}
+
+void Juego::table_init()
 {
     if(jugadores.size() <= 0)
     {
         cout << "No hay jugadores disponibles, agrega uno.\n";
-        return 0;
+        return;
     }
     else
     {
-        cout << "Si hay jugadores disponibles, se puede jugar.\n";
-        return 0;
+        repartir_cartas();
     }
-    return 0;
+    return;
 }

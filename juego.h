@@ -19,17 +19,18 @@ class Juego
         //Métodos
         Juego() {};
         Juego(std::string, std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
-        int interfaz();
-        int mostrar_jugadores();
+        void interfaz();
+        void mostrar_jugadores();
 
         //Opción 1:
-        int crear_jugador();
+        void crear_jugador();
 
         //Opción 2:
-        int eliminar_jugador();
+        void eliminar_jugador();
 
         //Opción 3:
-        int table_init();
+        void table_init();
+        void repartir_cartas();
 };
 
 #endif
