@@ -19,6 +19,8 @@ class Juego
         //Métodos
         Juego() {};
         Juego(std::string, std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
+        void load();
+        void save();
         void interfaz();
         void mostrar_jugadores();
 

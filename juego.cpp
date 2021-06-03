@@ -27,6 +27,50 @@ Juego::Juego(string archive, string save, vector<Jugador> players, Jugador deale
     baraja = deck;
 }
 
+void Juego::load()
+{
+    ifstream loading;
+    loading.open(guardado);
+
+    int size;
+    string name;
+    int money;
+
+    loading >> size;
+    for(int i = 0; i < size; i++)
+    {
+        loading >> name;
+        loading >> money;
+
+        vector<Carta> mazo = vector<Carta>();
+        Jugador player = Jugador(name, money, mazo);
+
+        jugadores.push_back(player);
+    }
+
+    loading.close();
+
+    return;
+}
+
+void Juego::save()
+{
+    ofstream saving;
+    saving.open(guardado);
+
+    saving << jugadores.size() << endl;
+
+    for(int i = 0; i < (int)jugadores.size(); i++)
+    {
+        saving << jugadores[i].nombre << endl;
+        saving << jugadores[i].dinero << endl;
+    }
+
+    saving.close();
+
+    return;
+}
+
 void Juego::interfaz()
 {
     int tabs = 0;
@@ -109,25 +153,32 @@ void Juego::mostrar_jugadores()
 
 void Juego::crear_jugador()
 {
-    //Definición
-    string name;
-    int money;
-    vector<Carta> mazo = vector<Carta>();
+    if((int)jugadores.size() >= 0 && (int)jugadores.size() < 7)
+    {
+        //Definición
+        string name;
+        int money;
+        vector<Carta> mazo = vector<Carta>();
 
-    //I/0
-    cout << "Escribe su nombre: ";
-    cin >> name;
-    cout << "¿Cuanto dinero quieres usar?: ";
-    cin >> money;
+        //I/0
+        cout << "Escribe su nombre: ";
+        cin >> name;
+        cout << "¿Cuanto dinero quieres usar?: ";
+        cin >> money;
 
-    //Creación jugador
-    Jugador player = Jugador(name, money, mazo);
-    
-    //Dentro de vector<Jugador> jugadores
-    jugadores.push_back(player);
+        //Creación jugador
+        Jugador player = Jugador(name, money, mazo);
+        
+        //Dentro de vector<Jugador> jugadores
+        jugadores.push_back(player);
 
-    //Retornar
-    return;
+        //Retornar
+        return;
+    }
+    else
+    {
+        cout << "Ya hay demasiados jugadores.\n";
+    }
 }
 
 void Juego::eliminar_jugador()
@@ -153,6 +204,7 @@ void Juego::eliminar_jugador()
             cout << "Escoge que jugador quieres eliminar: (1 a " << jugadores.size() << ") ";
             cin >> eleccion;
         }
+
         jugadores.erase(jugadores.begin()+(eleccion-1));
     }
     return;

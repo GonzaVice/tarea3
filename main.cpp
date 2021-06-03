@@ -35,6 +35,7 @@ vector<Carta> deck_setup()
 int choose(Juego game)
 {
     int choosed = 0;
+    game.load();
 
     while(choosed != 4)
     {
@@ -64,6 +65,10 @@ int choose(Juego game)
         else if(choosed == 3)
         {
             game.table_init();
+        }
+        else
+        {
+            game.save();
         }
     }
 
