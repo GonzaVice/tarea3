@@ -9,11 +9,14 @@ class Carta
         //Atributos
         int numero;
         char tipo;
+        int value_1;
+        int value_2;
         
         //Métodos
         Carta() {};
         Carta(int, char);
-        int mostrar_info();
+        void mostrar_info();
+        void blackjack_value();
 };
 
 #endif

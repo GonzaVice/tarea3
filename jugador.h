@@ -16,7 +16,7 @@ class Jugador
         //Métodos
         Jugador() {};
         Jugador(std::string, int, std::vector<Carta>);
-        int mostrar_info();
+        void mostrar_info();
 };
 
 #endif

@@ -117,8 +117,8 @@ void Juego::repartir_cartas()
         jugadores[i].mazo.push_back(second_card);
 
         cout << " Jugador " << jugadores[i].nombre << endl;
-        cout << jugadores[i].mazo[0].mostrar_info();
-        cout << jugadores[i].mazo[1].mostrar_info() << endl;
+        jugadores[i].mazo[0].mostrar_info();
+        jugadores[i].mazo[1].mostrar_info();
     }
     return;
 }
