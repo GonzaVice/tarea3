@@ -103,3 +103,18 @@ int Juego::eliminar_jugador()
     }
     return 0;
 }
+
+int Juego::table_init()
+{
+    if(jugadores.size() <= 0)
+    {
+        cout << "No hay jugadores disponibles, agrega uno.\n";
+        return 0;
+    }
+    else
+    {
+        cout << "Si hay jugadores disponibles, se puede jugar.\n";
+        return 0;
+    }
+    return 0;
+}

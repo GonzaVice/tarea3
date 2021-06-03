@@ -27,6 +27,9 @@ class Juego
 
         //Opción 2:
         int eliminar_jugador();
+
+        //Opción 3:
+        int table_init();
 };
 
 #endif

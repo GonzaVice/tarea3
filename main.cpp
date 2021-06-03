@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-//#include <list>
 #include <algorithm>
 
 #include "jugador.h"
@@ -58,6 +57,10 @@ int choose(Juego game)
         else if(choosed == 2)
         {
             game.eliminar_jugador();
+        }
+        else if(choosed == 3)
+        {
+            game.table_init();
         }
     }
 
