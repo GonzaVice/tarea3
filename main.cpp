@@ -23,6 +23,7 @@ vector<Carta> deck_setup()
             else if(j == 1) baraja.push_back(Carta(i+1, 'D'));
             else if(j == 2) baraja.push_back(Carta(i+1, 'P'));
             else baraja.push_back(Carta(i+1, 'T'));
+            baraja.back().blackjack_value();
         }
     }
 
@@ -37,18 +38,18 @@ int choose(Juego game)
 
     while(choosed != 4)
     {
-        system("clear");
-
-        cout << "Selecciona acción (1 a 4)\n";
+        cout << "Selecciona acción:\n";
         cout << "  1) Crear jugador nuevo\n";
         cout << "  2) Eliminar jugador\n";
         cout << "  3) Iniciar mesa\n";
         cout << "  4) Salir del Juego\n";
 
+        cout << "Entre 1 a 4: ";
         cin >> choosed;
         while(choosed < 1 || choosed > 4)
         {
             cout << "\nEscoge bien tu opción\n";
+            cout << "Entre 1 a 4: ";
             cin >> choosed;
         }
 
@@ -98,7 +99,7 @@ int main()
     Juego game = Juego("interfaz.txt", "save.txt", players, dealer, baraja);
 
     //Comienza elección
-    int eleccion = choose(game);
+    choose(game);
 
     return 0;
 }

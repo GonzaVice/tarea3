@@ -33,6 +33,7 @@ class Juego
         void repartir_cartas();
         void repartir_dealer();
         void begin_game();
+        void ask_card(int);
 };
 
 #endif

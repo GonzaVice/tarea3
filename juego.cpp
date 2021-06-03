@@ -41,9 +41,49 @@ void Juego::interfaz()
     {
         if(tabs == 17)
         {
-            cout << "│        │                   │ ";
+            cout << "│        │                   │";
             cout << distribuidor.mazo[0].print_value();
+            cout << " │  │                  │         │\n";
+        }
+        else if(tabs == 18)
+        {
+            cout << "│        │                   │ ";
+            distribuidor.mazo[0].print_sign();
             cout << "│  │                  │         │\n";
+        }
+        else if(tabs == 26)
+        {
+            cout << "│     ";
+            for(int i = 0; i < (int)jugadores.size(); i++)
+            {
+                cout << "|";
+                cout << jugadores[i].mazo[0].print_value();
+                cout << " │";
+                cout << jugadores[i].mazo[1].print_value();
+                cout << " │ ";
+            }
+            for(int j = 0; j < (int)(7 - jugadores.size()); j++)
+            {
+                cout << "│  │  │ ";
+            }
+            cout << "  │\n";
+        }
+        else if(tabs == 27)
+        {
+            cout << "│     ";
+            for(int i = 0; i < (int)jugadores.size(); i++)
+            {
+                cout << "| ";
+                jugadores[i].mazo[0].print_sign();
+                cout << "│ ";
+                jugadores[i].mazo[1].print_sign();
+                cout << "│ ";
+            }
+            for(int j = 0; j < (int)(7 - jugadores.size()); j++)
+            {
+                cout << "│  │  │ ";
+            }
+            cout << "  │\n";
         }
         else
         {
@@ -60,7 +100,7 @@ void Juego::interfaz()
 
 void Juego::mostrar_jugadores()
 {
-    for(int i = 0; i < jugadores.size(); i++)
+    for(int i = 0; i < (int)jugadores.size(); i++)
     {
         cout << i+1 << ") " << jugadores[i].nombre << " y $" << jugadores[i].dinero << endl;
     }
@@ -101,13 +141,13 @@ void Juego::eliminar_jugador()
         int eleccion;
 
         cout << "Jugadores:\n";
-        for(int i = 0; i < jugadores.size(); i++)
+        for(int i = 0; i < (int)jugadores.size(); i++)
         {
             cout << i+1 << ") " << jugadores[i].nombre << " y $" << jugadores[i].dinero << endl;
         }
         cout << "Escoge que jugador quieres eliminar: (1 a " << jugadores.size() << ") ";
         cin >> eleccion;
-        while(eleccion < 1 || eleccion > jugadores.size())
+        while(eleccion < 1 || eleccion > (int)jugadores.size())
         {
             cout << "Dato erroneo, escoge nuevamente.\n";
             cout << "Escoge que jugador quieres eliminar: (1 a " << jugadores.size() << ") ";
@@ -123,7 +163,7 @@ void Juego::repartir_cartas()
     Carta first_card;
     Carta second_card;
 
-    for(int i = 0; i < jugadores.size(); i++)
+    for(int i = 0; i < (int)jugadores.size(); i++)
     {
         first_card = baraja.back();
         baraja.pop_back();
@@ -160,9 +200,11 @@ void Juego::repartir_dealer()
     distribuidor.mazo[0].mostrar_info();
     distribuidor.mazo[1].mostrar_info();
 
+    cout << distribuidor.mazo[0].value_1 + distribuidor.mazo[1].value_1 << " < 17\n";
+    cout << distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2 << " < 17\n";
+
     // Si ambos valores posibles no suman mayor que 17
-    while(distribuidor.mazo[0].value_1 + distribuidor.mazo[1].value_1 < 17 &&
-        distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2 < 17)
+    while(distribuidor.mazo[0].value_1 + distribuidor.mazo[1].value_1 < 17 && distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2 < 17)
         {
             cout << "AGAIN\n";
 
@@ -190,17 +232,14 @@ void Juego::repartir_dealer()
             cout << " Jugador " << distribuidor.nombre << endl;
             distribuidor.mazo[0].mostrar_info();
             distribuidor.mazo[1].mostrar_info();
+
+            cout << distribuidor.mazo[0].value_1 + distribuidor.mazo[1].value_1 << " < 17\n";
+            cout << distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2 << " < 17\n";
         }
     cout << "NO PROBLEMO\n";
 
     return;
 
-}
-
-void Juego::begin_game()
-{
-    interfaz();
-    return;
 }
 
 void Juego::table_init()
@@ -219,5 +258,76 @@ void Juego::table_init()
         cout << "Presiona 0 para continuar.";
         cin >> i;
     }
+    return;
+}
+
+void Juego::begin_game()
+{
+    //system("clear");
+    int choosed;
+
+    for(int i = 0; i < (int)jugadores.size(); i++)
+    {
+        //system("clear");
+        interfaz();
+
+        cout << "Selecciona acción (1 a 3)\n";
+        cout << "  1) Pedir\n";
+        cout << "  2) Plantarse\n";
+        cout << "  3) Dividir\n";
+
+        cin >> choosed;
+        while(choosed < 1 || choosed > 3)
+        {
+            cout << "\nEscoge bien tu opción\n";
+            cin >> choosed;
+        }
+
+        if(choosed == 1)
+        {
+            ask_card(i);
+        }
+        else if(choosed == 3)
+        {
+            cout << "Funcionalidad aun no hecha\n";
+        }
+    }
+    return;
+}
+
+void Juego::ask_card(int pos)
+{
+    int choosed = 0;
+
+    cout << "Escoge cual de las dos cartas que tienes quieres cambiar:\n";
+    cout << " 1) ";
+    jugadores[pos].mazo[0].mostrar_info();
+    cout << " 2) ";
+    jugadores[pos].mazo[1].mostrar_info();
+    
+    cout << "(1 o 2): ";
+    cin >> choosed;
+
+    while(choosed < 1 || choosed > 2)
+    {
+        cout << "Escoge bien la opción\n";
+        cout << "(1 o 2): ";
+        cin >> choosed;
+    }
+
+    Carta cardJ;
+    Carta cardB;
+
+    if(choosed == 1)
+    {
+        cardJ = jugadores[pos].mazo[0];
+        jugadores[pos].mazo[0] = jugadores[pos].mazo[1];
+        jugadores[pos].mazo[1] = cardJ;
+    }
+
+    cardB = baraja.back();
+    baraja.pop_back();
+    jugadores[pos].mazo.push_back(cardB);
+
     return;
 }

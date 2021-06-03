@@ -41,6 +41,33 @@ void Carta::blackjack_value()
     return;
 }
 
+void Carta::print_sign()
+{
+    if(tipo == 'P')
+    {
+        //cout << '♠';
+        cout << "♠";
+    }
+    else if(tipo == 'D')
+    {
+        cout << "♦";
+    }
+    else if(tipo == 'C')
+    {
+        cout << "♥";
+    }
+    else if(tipo == 'T')
+    {
+        cout << "♣";
+    }
+    else
+    {
+        cout << 'X';
+    }
+    return;
+
+}
+
 char Carta::print_value()
 {
     if(numero == 1)
