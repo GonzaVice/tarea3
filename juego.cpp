@@ -71,7 +71,7 @@ void Juego::save()
     return;
 }
 
-void Juego::interfaz()
+void Juego::interfaz(int results)
 {
     int tabs = 0;
     string printer;
@@ -85,15 +85,37 @@ void Juego::interfaz()
     {
         if(tabs == 17)
         {
-            cout << "│        │                   │";
-            cout << distribuidor.mazo[0].print_value();
-            cout << " │  │                  │         │\n";
+            if(results == 0)
+            {
+                cout << "│        │                   │";
+                cout << distribuidor.mazo[0].print_value();
+                cout << " │  │                  │         │\n";
+            }
+            else
+            {
+                cout << "│        │                   │";
+                cout << distribuidor.mazo[0].print_value();
+                cout << " │";
+                cout << distribuidor.mazo[1].print_value();
+                cout << " │                  │         │\n"; 
+            }
         }
         else if(tabs == 18)
         {
-            cout << "│        │                   │ ";
-            cout << distribuidor.mazo[0].print_sign();
-            cout << "│  │                  │         │\n";
+            if(results == 0)
+            {
+                cout << "│        │                   │ ";
+                cout << distribuidor.mazo[0].print_sign();
+                cout << "│  │                  │         │\n";
+            }
+            else
+            {
+                cout << "│        │                   │ ";
+                cout << distribuidor.mazo[0].print_sign();
+                cout << "│ ";
+                cout << distribuidor.mazo[1].print_sign();
+                cout << "│                  │         │\n";
+            }
         }
         else if(tabs == 26)
         {
@@ -321,17 +343,22 @@ void Juego::begin_game()
     for(int i = 0; i < (int)jugadores.size(); i++)
     {
         //system("clear");
-        interfaz();
+        interfaz(0);
 
-        cout << "Selecciona acción (1 a 3)\n";
+        cout << "\nJugador " << i+1 << ": " << jugadores[i].nombre << endl;
+        cout << "\nDinero: " << jugadores[i].dinero << endl;
+        cout << "\n Selecciona acción:\n";
         cout << "  1) Pedir\n";
         cout << "  2) Plantarse\n";
         cout << "  3) Dividir\n";
+        cout << "  4) Retirarse\n";
 
+        cout << "\nElige del 1 al 4: ";
         cin >> choosed;
-        while(choosed < 1 || choosed > 3)
+        while(choosed < 1 || choosed > 4)
         {
             cout << "\nEscoge bien tu opción\n";
+            cout << "\nElige del 1 al 4: ";
             cin >> choosed;
         }
 
@@ -343,7 +370,15 @@ void Juego::begin_game()
         {
             cout << "Funcionalidad aun no hecha\n";
         }
+        else if(choosed == 4)
+        {
+            cout << "Jugador retirado\n";
+        }
     }
+
+    interfaz(1);
+    results();
+
     return;
 }
 
@@ -387,5 +422,10 @@ void Juego::ask_card(int pos)
     
     random_shuffle(baraja.begin(), baraja.end());
 
+    return;
+}
+
+void Juego::results()
+{
     return;
 }

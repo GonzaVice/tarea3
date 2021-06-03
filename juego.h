@@ -21,7 +21,7 @@ class Juego
         Juego(std::string, std::string, std::vector<Jugador>, Jugador, std::vector<Carta>);
         void load();
         void save();
-        void interfaz();
+        void interfaz(int);
         void mostrar_jugadores();
 
         //Opción 1:
@@ -36,6 +36,7 @@ class Juego
         void repartir_dealer();
         void begin_game();
         void ask_card(int);
+        void results();
 };
 
 #endif

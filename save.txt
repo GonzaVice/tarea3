@@ -3,5 +3,5 @@ Clark
 100
 Diana
 1400
-John
-23
+Bruce
+2000

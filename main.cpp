@@ -45,12 +45,12 @@ int choose(Juego game)
         cout << "  3) Iniciar mesa\n";
         cout << "  4) Salir del Juego\n";
 
-        cout << "Entre 1 a 4: ";
+        cout << "\nElige del 1 al 4: ";
         cin >> choosed;
         while(choosed < 1 || choosed > 4)
         {
             cout << "\nEscoge bien tu opción\n";
-            cout << "Entre 1 a 4: ";
+            cout << "\nElige del 1 al 4: ";
             cin >> choosed;
         }
 
