@@ -37,6 +37,8 @@ int choose(Juego game)
 
     while(choosed != 4)
     {
+        system("clear");
+
         cout << "Selecciona acción (1 a 4)\n";
         cout << "  1) Crear jugador nuevo\n";
         cout << "  2) Eliminar jugador\n";

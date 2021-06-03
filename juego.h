@@ -32,6 +32,7 @@ class Juego
         void table_init();
         void repartir_cartas();
         void repartir_dealer();
+        void begin_game();
 };
 
 #endif

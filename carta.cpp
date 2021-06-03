@@ -40,3 +40,65 @@ void Carta::blackjack_value()
     }
     return;
 }
+
+char Carta::print_value()
+{
+    if(numero == 1)
+    {
+        return 'A';
+    }
+    else if(numero == 2)
+    {
+        return '2';
+    }
+    else if(numero == 3)
+    {
+        return '3';
+    }
+    else if(numero == 4)
+    {
+        return '4';
+    }
+    else if(numero == 5)
+    {
+        return '5';
+    }
+    else if(numero == 6)
+    {
+        return '6';
+    }
+    else if(numero == 7)
+    {
+        return '7';
+    }
+    else if(numero == 8)
+    {
+        return '8';
+    }
+    else if(numero == 9)
+    {
+        return '9';
+    }
+    else if(numero == 10)
+    {
+        return 'T';
+    }
+    else if(numero == 11)
+    {
+        return 'J';
+    }
+    else if(numero == 12)
+    {
+        return 'Q';
+    }
+    else if(numero == 13)
+    {
+        return 'K';
+    }
+    else
+    {
+        return 'X';
+    }
+    return 'Y';
+}
+

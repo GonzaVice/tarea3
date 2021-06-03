@@ -17,6 +17,7 @@ class Carta
         Carta(int, char);
         void mostrar_info();
         void blackjack_value();
+        char print_value();
 };
 
 #endif

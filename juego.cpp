@@ -29,15 +29,28 @@ Juego::Juego(string archive, string save, vector<Jugador> players, Jugador deale
 
 void Juego::interfaz()
 {
+    int tabs = 0;
     string printer;
     ifstream inter;
 
     inter.open("interfaz.txt");
 
+    tabs++;
     getline(inter, printer);
 	while(inter)
     {
-        cout << printer << endl;
+        if(tabs == 17)
+        {
+            cout << "│        │                   │ ";
+            cout << distribuidor.mazo[0].print_value();
+            cout << "│  │                  │         │\n";
+        }
+        else
+        {
+            cout << printer << endl;
+        }
+
+        tabs++;
         getline(inter, printer);
 	}
 	inter.close();
@@ -184,8 +197,15 @@ void Juego::repartir_dealer()
 
 }
 
+void Juego::begin_game()
+{
+    interfaz();
+    return;
+}
+
 void Juego::table_init()
 {
+    int i;
     if(jugadores.size() <= 0)
     {
         cout << "No hay jugadores disponibles, agrega uno.\n";
@@ -195,6 +215,9 @@ void Juego::table_init()
     {
         repartir_cartas();
         repartir_dealer();
+        begin_game();
+        cout << "Presiona 0 para continuar.";
+        cin >> i;
     }
     return;
 }
