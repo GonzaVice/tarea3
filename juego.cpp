@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 #include "juego.h"
 #include "carta.h"
 #include "jugador.h"
@@ -20,7 +21,7 @@ Juego::Juego(string archive, string save, vector<Jugador> players, Jugador deale
     jugadores = players;
 
     //Jugador dealer
-    distruibidor = dealer;
+    distribuidor = dealer;
 
     //Vector de cartas
     baraja = deck;
@@ -106,13 +107,16 @@ void Juego::eliminar_jugador()
 
 void Juego::repartir_cartas()
 {
+    Carta first_card;
+    Carta second_card;
+
     for(int i = 0; i < jugadores.size(); i++)
     {
-        Carta first_card = baraja.back();
+        first_card = baraja.back();
         baraja.pop_back();
         jugadores[i].mazo.push_back(first_card);
 
-        Carta second_card = baraja.back();
+        second_card = baraja.back();
         baraja.pop_back();
         jugadores[i].mazo.push_back(second_card);
 
@@ -120,7 +124,64 @@ void Juego::repartir_cartas()
         jugadores[i].mazo[0].mostrar_info();
         jugadores[i].mazo[1].mostrar_info();
     }
+
     return;
+}
+
+void Juego::repartir_dealer()
+{
+    // Definición
+    Carta first_card;
+    Carta second_card;
+
+    // Saca baraja y entrega a Dealer
+    first_card = baraja.back();
+    baraja.pop_back();
+    distribuidor.mazo.push_back(first_card);
+
+    second_card = baraja.back();
+    baraja.pop_back();
+    distribuidor.mazo.push_back(second_card);
+
+    cout << " Jugador " << distribuidor.nombre << endl;
+    distribuidor.mazo[0].mostrar_info();
+    distribuidor.mazo[1].mostrar_info();
+
+    // Si ambos valores posibles no suman mayor que 17
+    while(distribuidor.mazo[0].value_1 + distribuidor.mazo[1].value_1 < 17 &&
+        distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2 < 17)
+        {
+            cout << "AGAIN\n";
+
+            // Retorno de cartas al mazo
+            first_card = distribuidor.mazo.back();
+            distribuidor.mazo.pop_back();
+            baraja.push_back(first_card);
+
+            second_card = distribuidor.mazo.back();
+            distribuidor.mazo.pop_back();
+            baraja.push_back(second_card);
+
+            // Revuelve baraja
+            random_shuffle(baraja.begin(), baraja.end());
+
+            // Saca baraja de nuevo
+            first_card = baraja.back();
+            baraja.pop_back();
+            distribuidor.mazo.push_back(first_card);
+
+            second_card = baraja.back();
+            baraja.pop_back();
+            distribuidor.mazo.push_back(second_card);
+
+            cout << " Jugador " << distribuidor.nombre << endl;
+            distribuidor.mazo[0].mostrar_info();
+            distribuidor.mazo[1].mostrar_info();
+        }
+    cout << "NO PROBLEMO\n";
+
+    return;
+
 }
 
 void Juego::table_init()
@@ -133,6 +194,7 @@ void Juego::table_init()
     else
     {
         repartir_cartas();
+        repartir_dealer();
     }
     return;
 }

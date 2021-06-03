@@ -72,6 +72,7 @@ int choose(Juego game)
     return choosed;
 }
 
+//Creacion de clase Game
 int main()
 {
     //Atributo jugadores

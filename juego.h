@@ -13,7 +13,7 @@ class Juego
         std::string archivo;
         std::string guardado;
         std::vector<Jugador> jugadores;
-        Jugador distruibidor;
+        Jugador distribuidor;
         std::vector<Carta> baraja;
 
         //Métodos
@@ -31,6 +31,7 @@ class Juego
         //Opción 3:
         void table_init();
         void repartir_cartas();
+        void repartir_dealer();
 };
 
 #endif
