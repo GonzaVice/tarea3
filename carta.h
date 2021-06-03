@@ -17,7 +17,7 @@ class Carta
         Carta(int, char);
         void mostrar_info();
         void blackjack_value();
-        void print_sign();
+        std::string print_sign();
         char print_value();
 };
 

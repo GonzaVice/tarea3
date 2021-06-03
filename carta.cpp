@@ -16,8 +16,8 @@ Carta::Carta(int number, char type)
 
 void Carta::mostrar_info()
 {
-    cout << "Carta es número " << numero;
-    cout << " y es tipo " << tipo << endl;
+    cout << "Carta con valor " << print_value();
+    cout << " y tipo " << print_sign() << endl;
     return;
 }
 
@@ -41,31 +41,29 @@ void Carta::blackjack_value()
     return;
 }
 
-void Carta::print_sign()
+string Carta::print_sign()
 {
     if(tipo == 'P')
     {
-        //cout << '♠';
-        cout << "♠";
+        return "♠";
     }
     else if(tipo == 'D')
     {
-        cout << "♦";
+        return "♦";
     }
     else if(tipo == 'C')
     {
-        cout << "♥";
+        return "♥";
     }
     else if(tipo == 'T')
     {
-        cout << "♣";
+        return "♣";
     }
     else
     {
-        cout << 'X';
+        return "X";
     }
-    return;
-
+    return "Y";
 }
 
 char Carta::print_value()

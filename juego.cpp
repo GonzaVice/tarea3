@@ -48,7 +48,7 @@ void Juego::interfaz()
         else if(tabs == 18)
         {
             cout << "│        │                   │ ";
-            distribuidor.mazo[0].print_sign();
+            cout << distribuidor.mazo[0].print_sign();
             cout << "│  │                  │         │\n";
         }
         else if(tabs == 26)
@@ -74,9 +74,9 @@ void Juego::interfaz()
             for(int i = 0; i < (int)jugadores.size(); i++)
             {
                 cout << "| ";
-                jugadores[i].mazo[0].print_sign();
+                cout << jugadores[i].mazo[0].print_sign();
                 cout << "│ ";
-                jugadores[i].mazo[1].print_sign();
+                cout << jugadores[i].mazo[1].print_sign();
                 cout << "│ ";
             }
             for(int j = 0; j < (int)(7 - jugadores.size()); j++)
@@ -327,7 +327,13 @@ void Juego::ask_card(int pos)
 
     cardB = baraja.back();
     baraja.pop_back();
+    cardJ = jugadores[pos].mazo.back();
+    jugadores[pos].mazo.pop_back();
+
+    baraja.push_back(cardJ);
     jugadores[pos].mazo.push_back(cardB);
+    
+    random_shuffle(baraja.begin(), baraja.end());
 
     return;
 }
