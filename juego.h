@@ -37,6 +37,7 @@ class Juego
         void begin_game();
         void ask_card(int);
         void results();
+        void retirar_jugador(int);
 };
 
 #endif

@@ -39,7 +39,16 @@ int choose(Juego game)
 
     while(choosed != 4)
     {
-        cout << "Selecciona acción:\n";
+        system("clear");
+
+        cout << " ♠ ♦ ♥ ♣ BLACK JACK ♠ ♦ ♥ ♣ \n\n";
+
+        cout << "La cantidad de jugadores son: ";
+        cout << game.jugadores.size() << endl;
+
+        game.mostrar_jugadores();
+
+        cout << "\nSelecciona acción:\n";
         cout << "  1) Crear jugador nuevo\n";
         cout << "  2) Eliminar jugador\n";
         cout << "  3) Iniciar mesa\n";
@@ -71,11 +80,6 @@ int choose(Juego game)
             game.save();
         }
     }
-
-    cout << "La cantidad de jugadores son: ";
-    cout << game.jugadores.size() << endl;
-
-    game.mostrar_jugadores();
 
     return choosed;
 }

@@ -12,6 +12,7 @@ class Jugador
         std::string nombre;
         int dinero;
         std::vector<Carta> mazo;
+        int apuesta;
         
         //Métodos
         Jugador() {};

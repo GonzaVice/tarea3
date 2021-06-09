@@ -234,6 +234,8 @@ void Juego::eliminar_jugador()
 
 void Juego::repartir_cartas()
 {
+    random_shuffle(baraja.begin(), baraja.end());
+
     Carta first_card;
     Carta second_card;
 
@@ -312,6 +314,9 @@ void Juego::repartir_dealer()
         }
     cout << "NO PROBLEMO\n";
 
+    distribuidor.mazo[0].blackjack_value();
+    distribuidor.mazo[1].blackjack_value();
+
     return;
 
 }
@@ -326,6 +331,7 @@ void Juego::table_init()
     }
     else
     {
+        random_shuffle(baraja.begin(), baraja.end());
         repartir_cartas();
         repartir_dealer();
         begin_game();
@@ -337,16 +343,58 @@ void Juego::table_init()
 
 void Juego::begin_game()
 {
-    //system("clear");
+    
     int choosed;
 
+    for(int i = 0; i < (int)jugadores.size(); i++)
+    {
+        Carta first_card = jugadores[i].mazo[0];
+        Carta second_card = jugadores[i].mazo[1];
+
+        baraja.push_back(first_card);
+        baraja.push_back(second_card);
+
+        jugadores[i].mazo.pop_back();
+        jugadores[i].mazo.pop_back();
+
+        random_shuffle(baraja.begin(), baraja.end());
+
+        first_card = baraja.back();
+        baraja.pop_back();
+        second_card = baraja.back();
+        baraja.pop_back();
+
+        jugadores[i].mazo.push_back(first_card);
+        jugadores[i].mazo.push_back(second_card);
+
+        random_shuffle(baraja.begin(), baraja.end());
+    }
+
+    repartir_dealer();
+
+    system("clear");
     for(int i = 0; i < (int)jugadores.size(); i++)
     {
         //system("clear");
         interfaz(0);
 
+        int apuesta;
+
         cout << "\nJugador " << i+1 << ": " << jugadores[i].nombre << endl;
         cout << "\nDinero: " << jugadores[i].dinero << endl;
+
+        cout << "\nCon cuanto quiere apostar:\n $";
+        cin >> apuesta;
+
+        while(apuesta > jugadores[i].dinero)
+        {
+            cout << "\nEstás apostando una cantidad más grande de la que tiene.\n";
+            cout << "\nCon cuanto quiere apostar:\n $";
+            cin >> apuesta;
+        }
+        jugadores[i].apuesta = apuesta;
+        jugadores[i].dinero -= jugadores[i].apuesta;
+
         cout << "\n Selecciona acción:\n";
         cout << "  1) Pedir\n";
         cout << "  2) Plantarse\n";
@@ -372,7 +420,7 @@ void Juego::begin_game()
         }
         else if(choosed == 4)
         {
-            cout << "Jugador retirado\n";
+            retirar_jugador(i);
         }
     }
 
@@ -427,5 +475,70 @@ void Juego::ask_card(int pos)
 
 void Juego::results()
 {
+    for(int i = 0; i < (int)jugadores.size(); i++)
+    {
+        int resultado_j = jugadores[i].mazo[0].value_2 + jugadores[i].mazo[1].value_2;
+        int resultado_d = distribuidor.mazo[0].value_2 + distribuidor.mazo[1].value_2;
+
+        cout << "\nResultado del Jugador " << i+1 << ": " << jugadores[i].nombre << endl;
+        if(resultado_j > resultado_d)
+        {
+            if(resultado_j == 21)
+            {
+                jugadores[i].apuesta += (jugadores[i].apuesta*1.5);
+                cout << "Hiciste Black Jack y ganaste contra el dealer.\nGanas tres dobles de lo que apostaste!\n";
+            }
+            else
+            {
+                if(jugadores[i].apuesta >= 10)
+                {
+                    jugadores[i].apuesta += (jugadores[i].apuesta*2);
+                    cout << "Ganaste contra el dealer y apostaste mas de $10.\nGanas el doble de lo que apostaste!\n";
+                }
+                else
+                {
+                    jugadores[i].apuesta += jugadores[i].apuesta;
+                    cout << "Ganaste contra el dealer.\nGanas lo mismo que apostaste!\n";
+                }
+            }
+        }
+        else if(resultado_j < resultado_d)
+        {
+            jugadores[i].apuesta = 0;
+            cout << "Perdiste contra dealer.\nPierdes la apuesta!";
+        }
+        else
+        {
+            if(resultado_j == 21)
+            {
+                cout << "Igualaste al dealer con Black Jack.\nNo ganaste ni perdiste.\n";
+            }
+            else
+            {
+                cout << "Igualaste al dealer.\nNo ganaste ni perdiste.\n";
+            }
+        }
+        jugadores[i].dinero += jugadores[i].apuesta;
+        
+        cout << "Dinero del Jugador " << i+1 << ": " << jugadores[i].nombre << endl;
+        cout << " $" << jugadores[i].dinero << endl << endl;
+
+    }
     return;
+}
+
+void Juego::retirar_jugador(int pos)
+{
+    Carta first_card = jugadores[pos].mazo[0];
+    Carta second_card = jugadores[pos].mazo[1];
+
+    baraja.push_back(first_card);
+    baraja.push_back(second_card);
+
+    jugadores[pos].mazo.pop_back();
+    jugadores[pos].mazo.pop_back();
+
+    random_shuffle(baraja.begin(), baraja.end());
+
+    jugadores.erase(jugadores.begin()+(pos));
 }

@@ -2,6 +2,6 @@
 Clark
 100
 Diana
-1400
+130
 Bruce
-2000
+200
